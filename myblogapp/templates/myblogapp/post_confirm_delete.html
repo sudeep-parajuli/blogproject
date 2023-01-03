@@ -1,5 +1,6 @@
 {% extends "myblogapp/base.html" %}
-{% block title %}Delete Post {% endblock %}
+{% block title %}About{% endblock %}
+
 {% block content %}
 <form action="" method="post">{% csrf_token %}
     <p>Are you sure you want to delete "{{ object }}"?</p>

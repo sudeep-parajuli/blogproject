@@ -55,21 +55,21 @@ class PostDeleteView(LoginRequiredMixin,DeleteView):
 
 @login_required
 def post_publish(request, pkk):
-    post = get_object_or_404(Post, pk=pkk)
-    post.published()
+    post_pub = get_object_or_404(Post, pk=pkk)
+    post_pub.published()
     return redirect("post_detail", pk=pkk)
 
 
 @login_required
 def add_comment_to_post(request, pkk):
-    post = get_object_or_404(Post, pk=pkk)
+    post_add = get_object_or_404(Post, pk=pkk)
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.post = post
+            comment.post = post_add
             comment.save()
-            return redirect("post_detail", pk=post.pkk)
+            return redirect("post_detail", pk=post_add.pkk)
     else:
         form = CommentForm()
     return render(request, "my_blog/comment_form.html", {"form":form})
@@ -77,15 +77,15 @@ def add_comment_to_post(request, pkk):
 
 @login_required
 def comment_approve(request, pkk):
-    comment = get_object_or_404(Comment, pk = pkk)
-    comment.approved()
-    return redirect("post_detail", pk=comment.post.pkk)
+    comment_app = get_object_or_404(Comment, pk = pkk)
+    comment_app.approved()
+    return redirect("post_detail", pk=comment_app.post.pkk)
 
 
 @login_required
 def comment_remove(request, pkk):
-    comment = get_object_or_404(Comment, pk= pkk)
-    post_pk = comment.post.pkk
-    comment.delete()
+    comment_rm = get_object_or_404(Comment, pk= pkk)
+    post_pk = comment_rm.post.pkk
+    comment_rm.delete()
     return redirect ("post_detail", pk=post_pk)    
 

@@ -1,4 +1,4 @@
-{% extends "myblogapp/base.html%}
+{% extends "myblogapp/base.html" %}
 
 {% block title%}Login In {% endblock %}
 
@@ -14,8 +14,8 @@
         {% csrf_token %}
         {{form.as_p}}
 
-        <input type="submit" class="btn btn-primary" value="" Login>
-        <input type="hidden" name="next" value="{{next}}">
+        <input type="submit" class="btn btn-primary" value="Login">
+        <!-- <input type="hidden" name="next" value="{{next_page}}"> -->
     </form>
 
 </div>

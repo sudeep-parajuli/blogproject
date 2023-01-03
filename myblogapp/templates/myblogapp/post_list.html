@@ -1,15 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "myblogapp/base.html" %}
+{% block title %}Home Page {% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+{% block content %}
+<div>
+    <h1>this is home page</h1>
 
-<body>
-    <h1>this is post list of all the post</h1>
-</body>
+    {% for post in post_pub %}
+    <div class="post">
 
-</html>
+        <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+        <div class="date">
+            <p>Published on: {{ post.published_date|date:"D M Y"}}</p>
+        </div>
+        <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approve_comments.count }}</a>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock %}
